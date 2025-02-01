@@ -1,0 +1,7 @@
+{
+  "name": "front_handy_receipt",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
