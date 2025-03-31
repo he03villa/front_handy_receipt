@@ -29,25 +29,14 @@ export class DashboardHomePage implements OnInit {
   timeComparisonChart: Chart | null = null;
   topProductsChart: Chart | null = null;
 
-  salesData = {
+  salesData:any = {
     totalRevenue: 125780,
     dailyAverage: 4192.67,
-    categorySales: [
-      { category: 'Electrónicos', amount: 45600 },
-      { category: 'Moda', amount: 32400 },
-      { category: 'Hogar', amount: 28900 },
-      { category: 'Deportes', amount: 18880 }
-    ],
-    topProducts: [
-      { name: 'Smartphone X', quantity: 245, revenue: 24500 },
-      { name: 'Laptop Pro', quantity: 128, revenue: 19200 },
-      { name: 'Auriculares Inalámbricos', quantity: 312, revenue: 15600 },
-      { name: 'Zapatillas Running', quantity: 198, revenue: 9900 },
-      { name: 'Smart TV 55"', quantity: 86, revenue: 8600 }
-    ],
-    dailySales: [4200, 3800, 4500, 3900, 4300, 4600, 4100],
-    weeklySales: [28000, 32000, 30000, 33000],
-    monthlySales: [96000, 115000, 125000]
+    categorySales: [],
+    topProducts: [],
+    dailySales: [],
+    weeklySales: [],
+    monthlySales: []
   };
 
   timeframe: string = 'daily';
@@ -111,9 +100,9 @@ export class DashboardHomePage implements OnInit {
     this.categorySalesChart = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: this.salesData.categorySales.map(item => item.category),
+        labels: this.salesData.categorySales.map((item:any) => item.category),
         datasets: [{
-          data: this.salesData.categorySales.map(item => item.amount),
+          data: this.salesData.categorySales.map((item:any) => item.amount),
           backgroundColor: ['#3880ff', '#3dc2ff', '#5260ff', '#2dd36f']
         }]
       },
@@ -175,10 +164,10 @@ export class DashboardHomePage implements OnInit {
     this.topProductsChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: this.salesData.topProducts.map(p => p.name),
+        labels: this.salesData.topProducts.map((p:any) => p.name),
         datasets: [{
           label: 'Ingresos ($)',
-          data: this.salesData.topProducts.map(p => p.revenue),
+          data: this.salesData.topProducts.map((p:any) => p.revenue),
           backgroundColor: 'rgba(45, 211, 111, 0.7)',
         }]
       },
