@@ -1,0 +1,67 @@
+<app-nav></app-nav>
+
+<ion-content [fullscreen]="true" class="user-list-content ion-padding">
+  <!-- Encabezado con título y buscador -->
+  <div class="header-container">
+    <h1 class="page-title">Productos</h1>
+    <p class="subtitle">Gestiona los productos</p>
+  </div>
+
+  <!-- Buscador con estilos mejorados -->
+  <div class="search-container">
+    <ion-searchbar [debounce]="1000" mode="ios" (ionInput)="handleInput($event)" placeholder="Buscar producto" class="custom-searchbar">
+    </ion-searchbar>
+  </div>
+
+  <!-- Lista de usuarios -->
+  <div class="user-stats">
+    <div class="stat-item">
+      <span class="stat-number">{{ activos }}</span>
+      <span class="stat-label">Activos</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">{{ inactivos }}</span>
+      <span class="stat-label">Inactivos</span>
+    </div>
+  </div>
+
+  <ion-list class="users-list">
+    @if (arrayProductos.length > 0) {
+      @for (item of arrayProductos; track $index) {
+        <div class="user-item">
+          <ion-avatar slot="start" class="user-avatar">
+            <ion-img [src]=" urlImage + item.imagen" (ionError)="_service.errorImg($event, 'https://i.pravatar.cc/300?u=bob')"></ion-img>
+          </ion-avatar>
+          <ion-label>
+            <h2 class="user-name">{{ item.nombre }}</h2>
+            <p class="user-role">Precio ${{ item.precio }}</p>
+            <p class="user-role">{{ item.categoria.nombre }}</p>
+            <p>{{ item.descripcion }}</p>
+          </ion-label>
+          <div class="product-actions">
+            <i class="fa-solid fa-pen update" (click)="editar(item.id)"></i>
+            <i class="fa-solid fa-trash eliminar" (click)="eliminar(item.id)"></i>
+            <ion-toggle mode="ios" class="status-toggle" checked [(ngModel)]="item.status" (ionChange)="updateStatus(item.id)"></ion-toggle>
+          </div>
+        </div>
+      }
+    }
+    @if (arrayProductos.length == 0) {
+      <div class="empty-state">
+        <ion-icon name="folder-open-outline"></ion-icon>
+        <h3>No hay productos</h3>
+        <p>Comienza añadiendo tu primera producto</p>
+      </div>
+    }
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <!-- Botón flotante para añadir -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="add-button" (click)="abrirModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

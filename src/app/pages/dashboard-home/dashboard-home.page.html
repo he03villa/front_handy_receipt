@@ -1,0 +1,110 @@
+<app-nav></app-nav>
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- Tarjetas de Resumen de Ingresos -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">Ingresos Totales</ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center">
+            <h1>$ {{salesData.totalRevenue | number:'1.0-0'}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-md="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">Promedio Diario</ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center">
+            <h1>$ {{salesData.dailyAverage | number:'1.2-2'}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-md="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">Categorías</ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center">
+            <h1>{{salesData.categorySales.length}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- Gráficos de Ventas -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Gráficos de Ventas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container">
+        <canvas #salesChart></canvas>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <div class="chart-container">
+              <canvas #categorySalesChart></canvas>
+            </div>
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-segment (ionChange)="segmentChanged($event)" value="daily">
+              <ion-segment-button value="daily">
+                <ion-label>Diario</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="weekly">
+                <ion-label>Semanal</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="monthly">
+                <ion-label>Mensual</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+            
+            <div class="chart-container">
+              <canvas #timeComparisonChart></canvas>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <!-- Top Productos Vendidos -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Top Productos Vendidos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container">
+        <canvas #topProductsChart></canvas>
+      </div>
+      <ion-list>
+        <ion-list-header>
+          <ion-label>Detalles</ion-label>
+        </ion-list-header>
+        @for (product of salesData.topProducts; track $index) {
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <ion-icon name="cube" size="large"></ion-icon>
+            </ion-thumbnail>
+
+            <ion-label>
+              <h2>{{product.name}}</h2>
+              <p>Unidades vendidas: {{product.quantity}}</p>
+            </ion-label>
+            <ion-note slot="end" color="success">
+              $ {{product.revenue | number:'1.0-0'}}
+            </ion-note>
+          </ion-item>
+        }
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

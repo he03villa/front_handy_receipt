@@ -1,0 +1,107 @@
+ion-list-header ion-img {
+    width: 96px;
+    height: auto;
+}
+
+ion-content {
+    --background: #fff;;
+}
+
+ion-list {
+    height: 100%;
+    background-color: #4E67B4;
+
+    ion-item {
+        --background: #4E68B4;
+
+        .content-menu {
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 10%;
+            }
+
+            label {
+                color: #FFFFFF;
+                font-size: 14px;
+                font-family: 'Poppins';
+                font-weight: 600;
+            }
+
+            .switchBtn {
+                position: relative;
+                display: inline-block;
+                width: 62px;
+                height: 27px;
+                left: 27px;
+                input {display:none;}
+            }
+
+            .slide {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #FFFFFF;
+                -webkit-transition: .4s;
+                transition: .4s;
+                padding: 3px 8px;
+                color: #777777;
+                &.round {
+                    border-radius: 34px;
+                    &::before {
+                        border-radius: 50%;
+                    }
+                }
+                &::before {
+                    position: absolute;
+                    content: "";
+                    height: 18px;
+                    width: 18px;
+                    left: 33px;
+                    bottom: 4px;
+                    background-color: #00DBFF;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+                }
+            }
+
+            input:checked + .slide {
+                background-color: #FFFFFF;
+                padding-left: 30px;
+            }
+            input:focus + .slide {
+                box-shadow: 0 0 1px #01aeed;
+            }
+            input:checked + .slide:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+                left: -20px;
+            }
+        }
+    }
+
+    .content-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        ion-button {
+            color: #4E67B4;
+            font-size: 10px;
+            font-family: 'Poppins';
+            font-weight: 500;
+            background-color: #FFFFFF;
+            border-radius: 6px;
+            width: 88%;
+        }
+    }
+
+}

@@ -1,0 +1,46 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="salir('', 'cancelar', undefined)" fill="clear" color="medium">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">{{ titulo }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="form-container">
+    <h2 class="ion-padding-bottom">{{ data?.id ? 'Editar' : 'Nuevo'}} registro</h2>
+    
+    <form action="" [formGroup]="form">
+      <ion-list lines="full" class="ion-no-padding ion-margin-bottom">
+        <ion-item class="custom-item">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" formControlName="nombre" class="custom-input"></ion-input>
+          <app-error 
+            [validation]="'required'" 
+            [message]="'El nombre es requerido'" 
+            [control]="form.controls['nombre']"
+            [clase]="'error-text'"
+          ></app-error>
+        </ion-item>
+        
+        <ion-item class="custom-item">
+          <ion-label position="floating">Descripción</ion-label>
+          <ion-textarea rows="4" formControlName="descripcion" class="custom-textarea"></ion-textarea>
+        </ion-item>
+      </ion-list>
+      
+      <div class="action-buttons">
+        <ion-button expand="block" color="primary" [disabled]="form.invalid" class="submit-button" (click)="guardar($event)">
+          <!-- <ion-icon name="checkmark-outline" slot="start"></ion-icon> -->
+          Aceptar
+        </ion-button>
+        <ion-button expand="block" fill="outline" color="medium" (click)="salir('', 'cancelar', undefined)" class="cancel-button">
+          Cancelar
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

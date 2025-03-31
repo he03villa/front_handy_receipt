@@ -1,0 +1,18 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <app-menu-lateral></app-menu-lateral>
+    <ion-router-outlet id="main-content">
+      <ion-tabs>
+        <ion-tab-bar slot="bottom">
+          @for (item of arrayRutas; track $index) {
+            <ion-tab-button [tab]="item.path == '' ? 'dashboard' : item.path" [href]="'/dashboard/' + item.path">
+              <!-- <ion-icon aria-hidden="true" [name]="item.data?.['img'] || 'home-outline'"></ion-icon> -->
+              <i class="fa-solid {{item.data?.['icon'] || 'fa-home'}}"></i>
+              <ion-label></ion-label>
+            </ion-tab-button>
+          }
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

@@ -1,0 +1,78 @@
+<app-nav></app-nav>
+
+<ion-content [fullscreen]="true" class="categories-content ion-padding">
+  <!-- Encabezado con título y buscador -->
+  <div class="header-container">
+    <h1 class="page-title">Facturas</h1>
+    <p class="subtitle">Gestiona las facturas</p>
+  </div>
+  <!-- Buscador con estilos mejorados -->
+  <div class="search-container">
+    <ion-searchbar [debounce]="1000" mode="ios" placeholder="Buscar factura" class="custom-searchbar">
+    </ion-searchbar>
+  </div>
+  <ion-list class="categories-list">
+    @if (arrayFacturas.length > 0) {
+      @for (item of arrayFacturas; track $index) {
+        <ion-item-sliding>
+          <ion-item class="invoice-card">
+            <div class="invoice-content">
+              <div class="invoice-header">
+                <h2 class="invoice-number">{{ item.numero_factura }}</h2>
+                <div class="invoice-status">
+                  <ion-chip color="primary" outline="true">
+                    <ion-label>{{ item.status }}</ion-label>
+                  </ion-chip>
+                </div>
+              </div>
+              
+              <div class="invoice-details">
+                <div class="detail-item">
+                  <ion-icon name="cash-outline" class="detail-icon"></ion-icon>
+                  <span class="detail-text">Total: {{ item.total | currency }}</span>
+                </div>
+                <div class="detail-item">
+                  <ion-icon name="basket-outline" class="detail-icon"></ion-icon>
+                  <span class="detail-text">Productos: {{ item.numero_detalle }}</span>
+                </div>
+              </div>
+              <div class="invoice-actions">
+                <div>
+                  <ion-select placeholder="Seleccionar estado" class="custom-select" [value]="item.status" mode="ios" (ionChange)="updateStatus(item.id, $event)">
+                    <ion-select-option value="pendiente">Pendiente</ion-select-option>
+                    <ion-select-option value="entregado">Entregado</ion-select-option>
+                    <ion-select-option value="cancelado">Cancelado</ion-select-option>
+                    <ion-select-option value="pagado">Pagado</ion-select-option>
+                  </ion-select>
+                </div>
+                <ion-button fill="clear" class="edit-button" (click)="editar(item.id)">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </ion-item>
+        </ion-item-sliding>
+        
+        <!-- Select y Botón fuera de ion-item-sliding -->
+      }      
+    }
+    @if (arrayFacturas.length == 0) {
+      <div class="empty-state">
+        <ion-icon name="folder-open-outline"></ion-icon>
+        <h3>No hay facturas</h3>
+        <p>Comienza añadiendo tu primera factura</p>
+      </div>
+    }
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <!-- Botón flotante para añadir -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="add-button" (click)="abrirModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

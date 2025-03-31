@@ -1,0 +1,85 @@
+<ion-content [fullscreen]="true" class="content-login">
+  <ion-grid>
+    <form [formGroup]="form">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="auto">
+          <div class="content-logo">
+            <label for="file-btn">
+              <img class="logo"
+                (error)="_services.errorImg($event, 'https://png.pngtree.com/png-clipart/20230804/original/pngtree-social-network-icon-3d-pax-world-general-vector-picture-image_9606980.png')"
+                [src]="form.get('logo')?.get('base64')?.value" alt="Logo Yumai">
+            </label>
+            <input type="file" name="" id="file-btn" accept="image/*" (change)="cambiaImagen($event)">
+          </div>
+        </ion-col>
+        <ion-col size="12">
+          <ion-text class="title">
+            <h2>Registrarse</h2>
+          </ion-text>
+        </ion-col>
+        <ion-col size="12">
+          <ion-label>Nombre de la empresa</ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <div class="content-password">
+            <ion-input class="form-control" formControlName="nombre_empresa" type="text" labelPlacement="stacked"
+              placeholder="Ingrese el nombre de la empresa"></ion-input>
+            <app-error [validation]="'required'" [message]="'El nombre de la empresa es requerido'"
+              [control]="form.get('nombre_empresa')" [clase]="'black'"></app-error>
+          </div>
+        </ion-col>
+        <ion-col size="12">
+          <ion-label>Correo</ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <div class="content-password">
+            <ion-input class="form-control" formControlName="email" type="email" labelPlacement="stacked"
+              placeholder="Ingrese su correo"></ion-input>
+            <app-error [validation]="'required'" [message]="'El correo es requerido'" [control]="form.get('email')"
+              [clase]="'black'"></app-error>
+            <app-error [validation]="'email'" [message]="'El correo no tiene el formato'" [control]="form.get('email')"
+              [clase]="'black'"></app-error>
+          </div>
+        </ion-col>
+        <ion-col size="12">
+          <ion-label>Contraseña</ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <div class="content-password">
+            <ion-input class="form-control" formControlName="password" [type]="!typePassword ? 'password' : 'text'"
+              labelPlacement="stacked" placeholder="Ingrese su contraseña"></ion-input>
+            <ion-icon slot="end" [name]="!typePassword ? 'eye-outline' : 'eye-off-outline'"
+              (click)="typePassword = !typePassword"></ion-icon>
+          </div>
+          <app-error [validation]="'required'" [message]="'La contraseña es requerido'" [control]="form.get('password')"
+            [clase]="'black'"></app-error>
+        </ion-col>
+        <ion-col size="12">
+          <ion-label>Confirmar Contraseña</ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <div class="content-password">
+            <ion-input class="form-control" formControlName="password_confirmation"
+              [type]="!typePasswordConfirmar ? 'password' : 'text'" labelPlacement="stacked"
+              placeholder="Ingrese su contraseña"></ion-input>
+            <ion-icon slot="end" [name]="!typePasswordConfirmar ? 'eye-outline' : 'eye-off-outline'"
+              (click)="typePasswordConfirmar = !typePasswordConfirmar"></ion-icon>
+          </div>
+          <app-error [validation]="'required'" [message]="'La contraseña es requerido'"
+            [control]="form.get('password_confirmation')" [clase]="'black'"></app-error>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button [disabled]="form.invalid" expand="block" (click)="register($event)">
+            Registrarse
+          </ion-button>
+        </ion-col>
+        <ion-col size="12">
+        </ion-col>
+        <ion-col size="auto" class="content-optional ion-text-center">
+          <p>¿Ya tienes una cuenta?</p>
+          <a (click)="_services.url('/login')">Iniciar sesión</a>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

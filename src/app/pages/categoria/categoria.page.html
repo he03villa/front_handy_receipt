@@ -1,0 +1,69 @@
+<app-nav></app-nav>
+
+<ion-content [fullscreen]="true" class="ion-padding categories-content">
+  <!-- Encabezado de la sección -->
+  <div class="header-container">
+    <h1>Categorías</h1>
+    <p class="subtitle">Gestiona tus categorías de productos</p>
+  </div>
+
+  <div class="search-container">
+    <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" mode="ios" placeholder="Buscar categoría"></ion-searchbar>
+  </div>
+
+  <!-- Lista de categorías -->
+  <ion-list class="categories-list">
+    @for (item of arrayCategorias; track $index) {
+      <ion-item-sliding>
+        <ion-item class="category-item">
+          <div class="category-info">
+            <h2 class="category-title">{{ item.nombre }}</h2>
+            <div class="product-count">
+              <ion-icon name="cube-outline"></ion-icon>
+              <span>{{ item.numero_productos }} productos</span>
+            </div>
+            <p class="category-description">{{ item.descripcion }}</p>
+          </div>
+        </ion-item>
+        <div class="content-opcions">
+          <a id="contenedor-{{ $index }}">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </a>
+          <ion-popover trigger="contenedor-{{ $index }}" triggerAction="click"  [dismissOnSelect]="true">
+            <ng-template>
+              <div slot="end" class="action-buttons">
+                <ion-button fill="clear" class="edit-button" (click)="editar(item.id)">
+                  <i class="fa-solid fa-pen update"></i>
+                  <ion-label>Editar</ion-label>
+                </ion-button>
+                <ion-button fill="clear" class="delete-button" (click)="eliminar(item.id)">
+                  <i class="fa-solid fa-trash eliminar"></i>
+                  <ion-label>Eliminar</ion-label>
+                </ion-button>
+              </div>
+            </ng-template>
+          </ion-popover>
+        </div>
+      </ion-item-sliding>
+    }
+
+    <!-- Estado vacío -->
+     @if (arrayCategorias.length == 0) {
+       <div class="empty-state">
+         <ion-icon name="folder-open-outline"></ion-icon>
+         <h3>No hay categorías</h3>
+         <p>Comienza añadiendo tu primera categoría</p>
+       </div>
+     }
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <!-- Botón flotante para añadir -->
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button (click)="abrirModal()" class="add-button">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

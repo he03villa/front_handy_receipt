@@ -1,0 +1,97 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="salir('', 'cancelar', undefined)" fill="clear" color="medium">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ titulo }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="form-container">
+    <h2 class="ion-text-center ion-padding-bottom form-title">{{ data?.id ? 'Editar' : 'Nuevo'}} registro</h2>
+
+    <form action="" [formGroup]="form">
+      <!-- Sección para subir imágenes -->
+      <div class="image-upload-container">
+        @if (getFormGroup('imagen').get('base64')?.value != '') {
+          <div class="image-preview" >
+            <img [src]="getFormGroup('imagen').get('base64')?.value" (error)="errorImagen($event, getFormGroup('imagen'))" alt="Vista previa">
+            <ion-button fill="clear" color="danger"  class="remove-image-btn" (click)="removeImage()">
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-button>
+          </div>
+        }
+        @if (getFormGroup('imagen').get('base64')?.value == '') {
+          <div class="upload-actions">
+            <div class="upload-buttons">
+              <ion-button expand="block" color="light" class="gallery-button" (click)="takePicture(camaraSource.Photos)">
+                <ion-icon name="images-outline" slot="start"></ion-icon>
+                Galería
+              </ion-button>
+              <ion-button expand="block" color="light" class="camera-button" (click)="takePicture(camaraSource.Camera)">
+                <ion-icon name="camera-outline" slot="start"></ion-icon>
+                Tomar Foto
+              </ion-button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <ion-list lines="full" class="ion-no-padding ion-margin-bottom form-list">
+        <ion-item class="custom-item">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" formControlName="nombre" class="custom-input"></ion-input>
+          <app-error 
+            [validation]="'required'" 
+            [message]="'El nombre es requerido'" 
+            [control]="form.controls['nombre']"
+            [clase]="'error-text'"
+          ></app-error>
+        </ion-item>
+
+        <ion-item class="custom-item">
+          <ion-label position="floating">Precio</ion-label>
+          <ion-input type="number" formControlName="precio" class="custom-input"></ion-input>
+          <app-error 
+            [validation]="'required'" 
+            [message]="'El precio es requerido'" 
+            [control]="form.controls['precio']"
+            [clase]="'error-text'"
+          ></app-error>
+        </ion-item>
+
+        <ion-item class="custom-item">
+          <ion-select formControlName="categoria_id" class="custom-input" placeholder="Categoria">
+            @for (item of arrayCategorias; track $index) {
+              <ion-select-option [value]="item.id">{{ item.nombre }}</ion-select-option>
+            }
+          </ion-select>
+          <app-error 
+            [validation]="'required'" 
+            [message]="'La categoria es requerida'" 
+            [control]="form.controls['categoria_id']"
+            [clase]="'error-text'"
+          ></app-error>
+        </ion-item>
+
+        <ion-item class="custom-item">
+          <ion-label position="floating">Descripción</ion-label>
+          <ion-textarea rows="4" formControlName="descripcion" class="custom-textarea"></ion-textarea>
+        </ion-item>
+      </ion-list>
+
+      <div class="action-buttons">
+        <ion-button expand="block" color="primary" [disabled]="form.invalid" class="submit-button" (click)="guardar($event)">
+          <ion-icon name="save-outline" slot="start"></ion-icon>
+          Guardar
+        </ion-button>
+        <ion-button expand="block" fill="outline" color="medium" (click)="salir('', 'cancelar', undefined)" class="cancel-button">
+          Cancelar
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

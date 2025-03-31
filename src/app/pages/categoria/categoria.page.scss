@@ -1,0 +1,185 @@
+.content-icon {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+
+    .eliminar {
+        color: red;
+    }
+
+    .update {
+        color: #4E67B4;
+    }
+}
+
+/* Estilos generales de la página */
+.categories-content {
+    --background: #f5f7fa;
+}
+
+/* Estilos del encabezado */
+.header-container {
+    margin-bottom: 24px;
+    padding-top: 8px;
+}
+
+.header-container h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+}
+
+.subtitle {
+    margin-top: 4px;
+    color: #6b7280;
+    font-size: 16px;
+}
+
+/* Estilos de la lista */
+.categories-list {
+    background: transparent;
+    padding: 0;
+}
+
+ion-item-sliding {
+    margin-bottom: 12px;
+    border-radius: 12px;
+    overflow: hidden;
+    --background: transparent;
+}
+
+.category-item {
+    --padding-start: 16px;
+    --padding-end: 12px;
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    --background: #ffffff;
+    --border-radius: 12px;
+    --border-style: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Información de la categoría */
+.category-info {
+    width: 100%;
+}
+
+.category-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.category-description {
+    margin: 4px 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.product-count {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    color: #4b5563;
+    font-size: 13px;
+}
+
+.product-count ion-icon {
+    margin-right: 6px;
+    color: #6b7280;
+    font-size: 16px;
+}
+
+/* Botones de acción */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.edit-button {
+    --color: #4f46e5;
+    font-size: 18px;
+    margin-right: 5px;
+
+    i {
+        margin-right: 10px;
+    }
+}
+
+.delete-button {
+    --color: #ef4444;
+    font-size: 18px;
+    i {
+        margin-right: 10px;
+    }
+}
+
+.search-container {
+    margin-bottom: 16px;
+}
+
+/* Opción de deslizar */
+ion-item-option {
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-start: 15px;
+    --padding-end: 15px;
+    font-size: 20px;
+}
+
+/* Botón FAB para añadir */
+.add-button {
+    --background: #4f46e5;
+    --background-activated: #4338ca;
+    --background-hover: #4338ca;
+    --box-shadow: 0 8px 16px rgba(79, 70, 229, 0.3);
+}
+
+/* Estado vacío */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.empty-state ion-icon {
+    font-size: 64px;
+    color: #d1d5db;
+    margin-bottom: 16px;
+}
+
+.empty-state h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.empty-state p {
+    margin-top: 8px;
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.content-opcions {
+    position: absolute;
+    z-index: 9;
+    top: 10px;
+    right: 15px;
+    a {
+        background: transparent;
+        color: black;
+        border: none;
+        box-shadow: none;
+        outline: none;
+        --background: transparent;
+        --box-shadow: none;
+    }
+}

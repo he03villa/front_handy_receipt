@@ -1,0 +1,52 @@
+<ion-menu color="light" contentId="main-content" type="overlay">
+  <ion-content>
+    <ion-list id="inbox-list">
+      <ion-list-header>
+        <div style="width: 100%; display: flex; justify-content: center; padding: 22px;">
+          <ion-img class="logo" src="https://png.pngtree.com/png-clipart/20230804/original/pngtree-social-network-icon-3d-pax-world-general-vector-picture-image_9606980.png" alt=""></ion-img>
+        </div>
+      </ion-list-header>
+      <div auto-hide="false">
+        <ion-item lines="none">
+          <div class="content-menu">
+            <img src="../../../assets/imgs/menu-lateral/notificacion.png" alt="">
+            <label for="">NOTIFICACIONES</label>
+            <label class="switchBtn">
+              <input type="checkbox">
+              <div class="slide round">On</div>
+          </label>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <div class="content-menu" (click)="_service.url('dashboard/perfil-usuario')">
+            <img src="../../../assets/imgs/menu-lateral/perfil.png" alt="">
+            <label for="">PERFIL DE USUARIO</label>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <div class="content-menu" (click)="_service.url('lista-restaurante')">
+            <img src="../../../assets/imgs/menu-lateral/perfil.png" alt="">
+            <label for="">Lista de restaurantes</label>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <div class="content-menu">
+            <img src="../../../assets/imgs/menu-lateral/politicas.png" alt="">
+            <label for="">POLITICAS</label>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <div class="content-menu">
+            <img src="../../../assets/imgs/menu-lateral/ayuda.png" alt="">
+            <label for="">AYUDA</label>
+          </div>
+        </ion-item>
+      </div>
+      <div class="content-btn">
+        <ion-button (click)="_service.cerrarSesion()" expand="block" fill="clear" shape="round">
+          CERRAR SESIÓN
+        </ion-button>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-menu>

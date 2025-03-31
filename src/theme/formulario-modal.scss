@@ -1,0 +1,114 @@
+:root {
+    --ion-color-primary: #4a6cf7;
+    --ion-color-primary-rgb: 74, 108, 247;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #4161d6;
+    --ion-color-primary-tint: #5c7cff;
+}
+
+ion-content {
+    --background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    margin-top: 30px;
+}
+
+.form-title {
+    font-size: 1.8rem;
+    color: var(--ion-color-primary);
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+ion-list {
+    background: transparent;
+}
+
+.custom-item {
+    --background: transparent;
+    --border-radius: 10px;
+    --border-color: #e0e0e0;
+    --highlight-color-focused: var(--ion-color-primary);
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+
+    ion-label {
+        margin-bottom: 10px !important;
+    }
+}
+
+.custom-input,
+.custom-textarea {
+    --background: transparent;
+    --border-radius: 10px;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    font-size: 0.95rem;
+}
+
+.error-text {
+    color: #f44336;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0;
+}
+
+.submit-button,
+.cancel-button {
+    --border-radius: 10px;
+    height: 50px;
+    text-transform: none;
+    font-weight: 600;
+}
+
+.submit-button {
+    --background: var(--ion-color-primary);
+    --background-activated: var(--ion-color-primary-shade);
+}
+
+.cancel-button {
+    --border-color: var(--ion-color-medium);
+    --color: var(--ion-color-medium);
+    --background: transparent;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .form-container {
+        margin-top: 10px;
+        padding: 15px;
+        border-radius: 0;
+        width: 100%;
+    }
+
+    .action-buttons {
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-title {
+        font-size: 1.5rem;
+    }
+
+    .custom-item {
+        margin-bottom: 8px;
+    }
+}

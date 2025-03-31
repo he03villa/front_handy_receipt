@@ -1,0 +1,142 @@
+.form-list {
+    margin-bottom: 24px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.custom-item {
+    --background: #fcfcfc;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --border-color: #e0e0e0;
+    --highlight-color-focused: var(--ion-color-primary);
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+.custom-input,
+.custom-textarea {
+    --padding-start: 0;
+    --padding-end: 0;
+    margin-top: 6px;
+    font-size: 16px;
+}
+
+.error-text {
+    color: #ff4961;
+    font-size: 12px;
+    margin-top: 4px;
+    padding-left: 16px;
+}
+
+/* Estilos para los botones de acción */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.submit-button {
+    --border-radius: 8px;
+    --box-shadow: 0 4px 8px rgba(76, 141, 255, 0.3);
+    margin-bottom: 8px;
+    font-weight: 500;
+    text-transform: none;
+    height: 48px;
+}
+
+.cancel-button {
+    --border-radius: 8px;
+    --border-color: #d7d8da;
+    text-transform: none;
+    height: 48px;
+}
+
+/* Estilos para la sección de carga de imágenes */
+.image-upload-container {
+    margin-bottom: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #f4f7fc;
+    border: 2px dashed #d0d9e8;
+    text-align: center;
+    position: relative;
+}
+
+.image-preview {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: -22px;
+    right: -22px;
+    --background: rgba(0, 0, 0, 0.5);
+    --border-radius: 50%;
+    --color: white;
+    width: 66px;
+    height: 66px;
+}
+
+.upload-actions {
+    padding: 24px 16px;
+}
+
+/* Nuevos estilos para los botones separados */
+.upload-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.gallery-button,
+.camera-button {
+    --background: white;
+    --color: var(--ion-color-primary);
+    --border-radius: 8px;
+    --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    text-transform: none;
+}
+
+.gallery-button {
+    --background: #f0f3fc;
+    border-left: 4px solid #7fa3ff;
+}
+
+.camera-button {
+    --background: #f0fcf8;
+    border-left: 4px solid #3dc795;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .action-buttons {
+        flex-direction: row;
+    }
+
+    .submit-button,
+    .cancel-button {
+        flex: 1;
+    }
+
+    .upload-buttons {
+        flex-direction: row;
+    }
+
+    .gallery-button,
+    .camera-button {
+        flex: 1;
+    }
+}
