@@ -7,6 +7,7 @@ import { Chart } from 'chart.js/auto';
 import { addIcons } from 'ionicons';
 import { cube } from 'ionicons/icons';
 import { FacturaService } from 'src/app/services/factura.service';
+import { EchoService } from 'src/app/services/echo.service';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -47,6 +48,7 @@ export class DashboardHomePage implements OnInit {
 
   ngOnInit() {
     this.cargarDashboard();
+    
   }
 
   async cargarDashboard() {

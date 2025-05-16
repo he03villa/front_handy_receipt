@@ -28,4 +28,14 @@ export class AuthService {
     const url = `${ environment.urlApi }${ environment.api.auth.service.login }`;
     return this._service.promise(this._data.metodoPost(url, data));
   }
+
+  async getUser() {
+    const url = `${ environment.urlApi }${ environment.api.auth.service.show }`;
+    return this._service.promise(this._data.metodoGet(url));
+  }
+
+  async updateEmpresa(id:any, data:any) {
+    const url = `${ environment.urlApi }${ environment.api.empresa.name }/${ id }`;
+    return this._service.promise(this._data.metodoPut(url, data));
+  }
 }

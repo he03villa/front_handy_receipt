@@ -26,6 +26,10 @@ export const routes: Routes = [
                 data: { title: 'Categorias', icon: 'fa-list' },
             },
             {
+                path: 'profile',
+                loadComponent: () => import('../profile/profile.page').then( m => m.ProfilePage)
+            },
+            {
                 path: '**',
                 redirectTo: 'home',
                 pathMatch: 'full',

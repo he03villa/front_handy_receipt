@@ -30,7 +30,7 @@
       @for (item of arrayProductos; track $index) {
         <div class="user-item">
           <ion-avatar slot="start" class="user-avatar">
-            <ion-img [src]=" urlImage + item.imagen" (ionError)="_service.errorImg($event, 'https://i.pravatar.cc/300?u=bob')"></ion-img>
+            <ion-img [src]="item.imagen_url" (ionError)="_service.errorImg($event, 'assets/logo.png')"></ion-img>
           </ion-avatar>
           <ion-label>
             <h2 class="user-name">{{ item.nombre }}</h2>

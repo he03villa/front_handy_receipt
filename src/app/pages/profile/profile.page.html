@@ -1,0 +1,62 @@
+<app-nav></app-nav>
+
+<ion-content [fullscreen]="true" class="profile-edit-content">
+  <form [formGroup]="form">
+    <ion-grid class="ion-padding">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" class="ion-text-center">
+          <div class="profile-image-container">
+            <input type="file" id="file-btn" accept="image/*" class="file-input" (change)="cambiaImagen($event)">
+            <label for="file-btn" class="image-upload-label">
+              <img class="profile-image" 
+                   [src]="form.get('logo')?.get('base64')?.value"
+                   (error)="_services.errorImg($event, 'https://png.pngtree.com/png-clipart/20230804/original/pngtree-social-network-icon-3d-pax-world-general-vector-picture-image_9606980.png')"
+                   alt="Profile image">
+              <ion-icon name="camera" class="edit-icon"></ion-icon>
+            </label>
+          </div>
+          <ion-text class="title">
+            <h1 class="ion-no-margin">Editar Perfil</h1>
+          </ion-text>
+        </ion-col>
+  
+        <ion-col size="12" class="form-container">
+          <ion-item lines="none" class="custom-input">
+            <ion-icon name="person" slot="start" class="input-icon"></ion-icon>
+            <ion-input label="Nombre" 
+                       labelPlacement="floating" 
+                       placeholder="John Doe" 
+                       class="input-field"
+                       formControlName="name"></ion-input>
+          </ion-item>
+  
+          <!-- <ion-item lines="none" class="custom-input">
+            <ion-icon name="mail" slot="start" class="input-icon"></ion-icon>
+            <ion-input type="email" 
+                       label="Correo electrónico" 
+                       labelPlacement="floating" 
+                       placeholder="jdoe@ex.com" 
+                       class="input-field"></ion-input>
+          </ion-item> -->
+  
+          <ion-item lines="none" class="custom-input">
+            <ion-icon name="document-text" slot="start" class="input-icon"></ion-icon>
+            <ion-textarea label="Descripción" 
+                         labelPlacement="floating" 
+                         rows="4" 
+                         placeholder="Cuéntanos sobre ti..."
+                         class="input-field"
+                         formControlName="description"></ion-textarea>
+          </ion-item>
+  
+          <div class="ion-padding-top ion-text-center">
+            <ion-button shape="round" class="save-button" [disabled]="form.invalid" (click)="updateEmpresa($event)">
+              Guardar Cambios
+              <ion-icon slot="end" name="checkmark-circle"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

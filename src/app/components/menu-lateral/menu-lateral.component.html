@@ -3,7 +3,7 @@
     <ion-list id="inbox-list">
       <ion-list-header>
         <div style="width: 100%; display: flex; justify-content: center; padding: 22px;">
-          <ion-img class="logo" src="https://png.pngtree.com/png-clipart/20230804/original/pngtree-social-network-icon-3d-pax-world-general-vector-picture-image_9606980.png" alt=""></ion-img>
+          <ion-img class="logo" src="../../../assets/eslogan.png" alt=""></ion-img>
         </div>
       </ion-list-header>
       <div auto-hide="false">
@@ -18,12 +18,12 @@
           </div>
         </ion-item>
         <ion-item lines="none">
-          <div class="content-menu" (click)="_service.url('dashboard/perfil-usuario')">
+          <div class="content-menu" (click)="_service.url('dashboard/profile')">
             <img src="../../../assets/imgs/menu-lateral/perfil.png" alt="">
             <label for="">PERFIL DE USUARIO</label>
           </div>
         </ion-item>
-        <ion-item lines="none">
+        <!-- <ion-item lines="none">
           <div class="content-menu" (click)="_service.url('lista-restaurante')">
             <img src="../../../assets/imgs/menu-lateral/perfil.png" alt="">
             <label for="">Lista de restaurantes</label>
@@ -40,7 +40,7 @@
             <img src="../../../assets/imgs/menu-lateral/ayuda.png" alt="">
             <label for="">AYUDA</label>
           </div>
-        </ion-item>
+        </ion-item> -->
       </div>
       <div class="content-btn">
         <ion-button (click)="_service.cerrarSesion()" expand="block" fill="clear" shape="round">
