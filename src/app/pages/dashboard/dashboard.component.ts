@@ -15,16 +15,16 @@ import { EchoService } from 'src/app/services/echo.service';
 export class DashboardComponent  implements OnInit {
 
   arrayRutas = routes.find(route => route.path === '')?.children?.filter(route => route.data).map(route => ({...route, activo: false})) || [];
-  private _echo:EchoService = inject(EchoService);
+  //private _echo:EchoService = inject(EchoService);
 
   constructor() { 
     console.log(this.arrayRutas);
   }
 
   ngOnInit() {
-    this._echo.getEcho().channel('chat').listen('MessageSent', (resp:any) => {
+    /*this._echo.getEcho().channel('chat').listen('MessageSent', (resp:any) => {
       console.log(resp);
-    });
+    });*/
   }
 
 }

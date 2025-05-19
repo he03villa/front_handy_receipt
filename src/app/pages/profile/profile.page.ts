@@ -40,12 +40,15 @@ export class ProfilePage implements OnInit {
   }
 
   async cargarUser() {
+    const loading = await this._services.Loading();
+    loading.present();
     const res:any = await this._auth.getUser();
     if (!res.error) {
       this.dataUser = res.empresa;
       this.iniciarForm(this.dataUser);
       console.log(this.dataUser);
     }
+    loading.dismiss();
   }
 
   iniciarForm(data:any = null) {

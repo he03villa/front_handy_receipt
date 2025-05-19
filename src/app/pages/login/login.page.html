@@ -16,19 +16,19 @@
         <ion-col size="12">
           <div class="content-password">
             <ion-input class="form-control" formControlName="email" type="email" labelPlacement="stacked" placeholder="Ingrese su correo"></ion-input>
-            <app-error
-              [validation]="'required'"
-              [message]="'El correo es requerido'"
-              [control]="form.get('email')"
-              [clase]="'black'"
-            ></app-error>
-            <app-error
-              [validation]="'email'"
-              [message]="'El correo no tiene el formato'"
-              [control]="form.controls['email']"
-              [clase]="'black'"
-            ></app-error>
           </div>
+          <app-error
+            [validation]="'required'"
+            [message]="'El correo es requerido'"
+            [control]="form.get('email')"
+            [clase]="'black'"
+          ></app-error>
+          <app-error
+            [validation]="'email'"
+            [message]="'El correo no tiene el formato'"
+            [control]="form.controls['email']"
+            [clase]="'black'"
+          ></app-error>
         </ion-col>
         <ion-col size="12">
           <ion-label>Contraseña</ion-label>

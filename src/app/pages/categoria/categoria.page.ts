@@ -34,9 +34,12 @@ export class CategoriaPage implements OnInit {
   }
 
   async cargarCategporias(data:any) {
+    const loading = await this._service.Loading();
+    loading.present();
     const res:any = await this._categoria.getAllCategorias(data);
     this.arrayCategorias.push(...res.data);
     this.page = res.page;
+    loading.dismiss();
     console.log(res);
   }
 

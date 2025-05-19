@@ -20,18 +20,17 @@ export class EchoService {
       wssPort: environment.VITE_REVERB_PORT,
       forceTLS: (environment.VITE_REVERB_SCHEME ?? 'https') === 'https',
       enabledTransports: ['ws', 'ws'],
-      /*authEndpoint: `${environment.urlApi}broadcasting/auth`,
+      authEndpoint: `${environment.urlApi}broadcasting/auth`,
       auth: {
         headers: {
           Accept: 'application/json',
-          "X-Authorization": `Bearer ${ localStorage.getItem('token') }`
+          "Authorization": `Bearer ${ localStorage.getItem('token') }`
         }
-      }*/
+      }
     });
   }
 
   getEcho() {
-    console.log(this.echo);
     return this.echo;
   }
 }

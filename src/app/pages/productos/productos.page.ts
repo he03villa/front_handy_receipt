@@ -10,6 +10,7 @@ import { add, cubeOutline, folderOpenOutline } from 'ionicons/icons';
 import { AlertOptions, InfiniteScrollCustomEvent, ModalOptions } from '@ionic/core';
 import { ModalProductoPage } from 'src/app/modal/modal-producto/modal-producto.page';
 import { environment } from 'src/environments/environment.prod';
+import { EchoService } from 'src/app/services/echo.service';
 
 @Component({
   selector: 'app-productos',
@@ -21,6 +22,7 @@ import { environment } from 'src/environments/environment.prod';
 export class ProductosPage implements OnInit {
 
   private _producto:ProductoService = inject(ProductoService);
+  private _echo:EchoService = inject(EchoService);
   _service: ServiceService = inject(ServiceService);
   arrayProductos:Array<any> = [];
   page:number = 1;
@@ -35,16 +37,39 @@ export class ProductosPage implements OnInit {
   }
 
   ngOnInit() {
+    this._echo.getEcho().private('channel-producto').listen('ProductoEvent', (resp:any) => {
+      console.log(resp);
+      if (resp.action == 'created') {
+        this.arrayProductos.unshift(resp.producto);
+        this.countActivosInactivos();
+      } else if (resp.action == 'updated') {
+        const index = this.arrayProductos.findIndex((item:any) => item.id == resp.producto.id);
+        this.arrayProductos[index] = resp.producto;
+        this.countActivosInactivos();
+      } else if (resp.action == 'deleted') {
+        const index = this.arrayProductos.findIndex((item:any) => item.id == resp.producto.id);
+        this.arrayProductos.splice(index, 1);
+        this.countActivosInactivos();
+      }
+    });
     this.cargarProductos({page: 1});
   }
 
+  onDestroy() {
+    console.log('desconectado');
+    this._echo.getEcho().disconnect();
+  }
+
   async cargarProductos(data:any) {
+    const loading = await this._service.Loading();
+    loading.present();
     const res:any = await this._producto.getAllProductos(data);
     this.arrayProductos.push(...res.data);
     this.page = res.page;
     this.total_pages = res.total_pages;
     this.activos = res.total_activo;
     this.inactivos = res.total_inactivo;
+    loading.dismiss();
   }
 
   async abrirModal() {
@@ -59,9 +84,12 @@ export class ProductosPage implements OnInit {
   }
 
   async editar(id:any) {
+    const loading = await this._service.Loading();
+    loading.present();
     const res:any = await this._producto.getProducto(id);
     const data:ModalOptions = { component: ModalProductoPage, componentProps: { titulo: 'Editar Producto', data: res } };
     const modal = await this._service.abrirModal(data);
+    loading.dismiss();
     modal.present();
     const { data: resModal, role } = await modal.onWillDismiss();
     if (role == 'success') {
@@ -77,9 +105,12 @@ export class ProductosPage implements OnInit {
       buttons: [
         { text: 'Cancelar', role: 'cancel', handler: () => { console.log('Confirm Cancel'); } },
         { text: 'Aceptar', role: 'confirm', handler: async () => { 
+          const loading = await this._service.Loading();
+          loading.present();
           const res:any = await this._producto.delete(id);
           const index = this.arrayProductos.findIndex((item:any) => item.id == id);
           this.arrayProductos.splice(index, 1);
+          loading.dismiss();
           this.countActivosInactivos();
          } 
         }

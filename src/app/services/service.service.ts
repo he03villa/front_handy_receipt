@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController, AlertController, AlertOptions } from '@ionic/angular/standalone';
+import { ModalController, AlertController, AlertOptions, LoadingController } from '@ionic/angular/standalone';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,6 +11,7 @@ export class ServiceService {
   private _router:Router = inject(Router);
   private alertController: AlertController = inject(AlertController);
   private modalCtrl: ModalController = inject(ModalController);
+  private loadingCtrl: LoadingController = inject(LoadingController);
 
   constructor() { }
 
@@ -29,6 +30,11 @@ export class ServiceService {
   async Alert(data:AlertOptions) {
     const alert = await this.alertController.create(data);
     await alert.present();
+  }
+
+  async Loading() {
+    const loading = await this.loadingCtrl.create({ message: 'Cargando...' });
+    return loading;
   }
 
   /**

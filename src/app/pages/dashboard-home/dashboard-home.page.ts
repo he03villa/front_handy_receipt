@@ -7,7 +7,7 @@ import { Chart } from 'chart.js/auto';
 import { addIcons } from 'ionicons';
 import { cube } from 'ionicons/icons';
 import { FacturaService } from 'src/app/services/factura.service';
-import { EchoService } from 'src/app/services/echo.service';
+import { ServiceService } from 'src/app/services/service.service';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -19,6 +19,7 @@ import { EchoService } from 'src/app/services/echo.service';
 export class DashboardHomePage implements OnInit {
 
   private _factura:FacturaService = inject(FacturaService);
+  _services:ServiceService = inject(ServiceService);
 
   @ViewChild('salesChart') salesChartRef: ElementRef | undefined;
   @ViewChild('categorySalesChart') categorySalesChartRef: ElementRef | undefined;
@@ -52,15 +53,17 @@ export class DashboardHomePage implements OnInit {
   }
 
   async cargarDashboard() {
+    const loading = await this._services.Loading();
+    loading.present();
     const res:any = await this._factura.getDashboard();
     if (!res.error) {
       this.salesData = res;
-      console.log(this.salesData);
       this.createSalesChart();
       this.createCategorySalesChart();
       this.createTimeComparisonChart();
       this.createTopProductsChart();
     }
+    loading.dismiss();
   }
 
   ionViewDidEnter() {

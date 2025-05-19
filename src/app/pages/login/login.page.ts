@@ -42,9 +42,9 @@ export class LoginPage implements OnInit {
     const data = this.form.getRawValue();
     const res:any = await this._auth.login(data);
     if (!res.error) {
-      console.log(res);
       this.form.reset();
       localStorage.setItem('dataUser', JSON.stringify(res));
+      localStorage.setItem('token', res.access_token);
       this._services.url('/dashboard');
     }
     this._services.removeLoading(event.target);

@@ -40,19 +40,25 @@ export class FacturasPage implements OnInit {
   }
 
   async cargarFacturas(data:any) {
+    const loading = await this._service.Loading();
+    loading.present();
     const res:any = await this._factura.getAllFacturas(data);
     if (!res.error) {
       console.log(res);
       this.arrayFacturas = res.data;
       this.total_pages = res.total_pages;
     }
+    loading.dismiss();
   }
 
   async editar(id:any) {
+    const loading = await this._service.Loading();
+    loading.present();
     const res:any = await this._factura.getFactura(id);
     let datos = res;
     datos.detalles = res.productos.map((item:any) => item.pivot);
     const data:ModalOptions = { component: ModalAddUpdateFacturaPage, componentProps: { titulo: 'Editar Factura', data: res } };
+    loading.dismiss();
     const modal = await this._service.abrirModal(data);
     modal.present();
   }
